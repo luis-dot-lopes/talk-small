@@ -1,0 +1,41 @@
+
+header h1 {
+    background-color: #3030ff;
+    padding: 15px 25px;
+    color: #ffffff;
+    font-family: arial;
+    text-shadow: -3px 3px 5px #000;
+    margin-bottom: 5px;
+}
+
+nav {
+    float: left;
+    width: 25%;
+    height: 84vh;
+    background-color: #ddd;
+}
+
+.talk {
+    padding-left: 10px;
+    border-bottom: solid #eee 2px;
+}
+
+.talk h3 {
+    font-weight: 400;
+}
+
+.talk h4 {
+    font-weight: 400;
+}
+
+.talk-content {
+    float: right;
+    width: 75%;
+    height: 84vh;
+    background-color: #eaeaea;
+}
+
+.talk-header {
+    background-color: #eeeeff;
+    padding: 5px 25px;
+}
