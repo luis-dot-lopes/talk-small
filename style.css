@@ -30,12 +30,70 @@ nav {
 
 .talk-content {
     float: right;
+    position: relative;
     width: 75%;
     height: 84vh;
     background-color: #eaeaea;
 }
 
 .talk-header {
-    background-color: #eeeeff;
     padding: 5px 25px;
+}
+
+.talk-header h2 {
+    margin: 3px 0px 0px 0px;
+}
+
+.talk-header p {
+    margin-top: 5px;
+}
+
+.talk-messages {
+    padding: 5px 25px;
+    height: 70%;
+    overflow-y: scroll;
+}
+
+.message {
+    margin: 10px 0px;
+    padding: 10px;
+    border-radius: 5px;
+    width: max-content;
+    max-width: 50%;
+}
+
+.sent {
+    background-color: #6060ff;
+    float: right;
+    clear: right;
+}
+
+.received {
+    background-color: #ccc;
+    clear: right;
+}
+
+.talk-footer {
+    position: absolute;
+    bottom: 0;
+    width: 95%;
+    margin: 0px 0px 20px 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.message-input {
+    width: 80%; 
+    padding: 8px;
+    border: solid #aaa 2px;
+    border-radius: 5px;
+}
+
+.message-send {
+    margin-left: 15px;
+    border-radius: 5px;
+    border: none;
+    color: #ffffff;
+    font-weight: 700;
+    background-color: #3030ff;
 }
