@@ -13,6 +13,7 @@ nav {
     width: 25%;
     height: 84vh;
     background-color: #ddd;
+    overflow-y: scroll;
 }
 
 .talk {
