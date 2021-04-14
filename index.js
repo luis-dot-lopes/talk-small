@@ -1,5 +1,5 @@
 //Talks will be hardcoded for testing
-let talks = {
+const talks = {
     'John' : [
         ['sent', "Hello John."],
         ['received', "Hello Luis. What's up?"],
@@ -19,6 +19,7 @@ let talks = {
         ['received', "Ok. Bye"]
     ]
 };
+let selected_talk = 'John';
 
 //load talks on nav
 const showCurrentTalks = () => {
@@ -44,13 +45,42 @@ const showCurrentTalks = () => {
     }
 }
 
-const showTalkContent = () => {
-    
+const showTalkContent = (talk_name) => {
+
+    let talk = talks[talk_name];
+    let talk_content = document.getElementsByClassName('talk-content')[0];
+
+    //creating talk header
+    let talk_header = document.createElement('div');
+    talk_header.className = 'talk-header';
+
+    let h2 = document.createElement('h2');
+    h2.textContent = talk_name;
+    let p = document.createElement('p');
+    p.textContent = "Last seen 4:20"; //hardcoded for now
+
+    talk_header.appendChild(h2);
+    talk_header.appendChild(p);
+
+    //displaying messages
+    let talk_messages = document.createElement('div');
+    talk_messages.className = 'talk-messages';
+    for(message of talk) {
+        let message_div = document.createElement('div');
+        message_div.className = `message ${message[0]}`;
+        message_div.textContent = message[1];
+        talk_messages.appendChild(message_div);
+    }
+
+    talk_content.appendChild(talk_header);
+    talk_content.appendChild(talk_messages);
+
 }
 
 window.onload = () => {
     //Loading the interface
     showCurrentTalks();
+    showTalkContent(selected_talk);
 
     //setting up the 'Send' button
     let send_button = document.getElementsByClassName("message-send")[0];
