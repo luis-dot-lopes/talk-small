@@ -1,5 +1,5 @@
 //Talks will be hardcoded for testing
-let talks = {
+const talks = {
     'John' : [
         ['sent', "Hello John."],
         ['received', "Hello Luis. What's up?"],
@@ -19,12 +19,12 @@ let talks = {
         ['received', "Ok. Bye"]
     ]
 };
+let selected_talk = 'John';
 
 //load talks on nav
 const showCurrentTalks = () => {
     let nav = document.getElementsByTagName('nav')[0];
-    for(talk_name in talks) {
-        console.log(talk_name); 
+    for(let talk_name in talks) {
         let talk = talks[talk_name];
         let talk_div = document.createElement('div');
         talk_div.className = 'talk';
@@ -40,17 +40,57 @@ const showCurrentTalks = () => {
         }
         talk_div.appendChild(h3_node);
         talk_div.appendChild(h4_node);
+        talk_div.addEventListener("click", () => showTalkContent(talk_name));
         nav.appendChild(talk_div);
     }
 }
 
-const showTalkContent = () => {
-    
+const showTalkContent = (talk_name) => {
+
+    let talk = talks[talk_name];
+    let talk_content = document.getElementsByClassName('talk-content')[0];
+
+    //cleaning current talk
+    let old_talk_header = talk_content.getElementsByClassName('talk-header')[0];
+    if(old_talk_header) {
+        talk_content.removeChild(old_talk_header);
+    }
+    let old_talk_messages = talk_content.getElementsByClassName('talk-messages')[0];
+    if(old_talk_messages) {
+        talk_content.removeChild(old_talk_messages);
+    }
+
+    //creating talk header
+    let talk_header = document.createElement('div');
+    talk_header.className = 'talk-header';
+
+    let h2 = document.createElement('h2');
+    h2.textContent = talk_name;
+    let p = document.createElement('p');
+    p.textContent = "Last seen 4:20"; //hardcoded for now
+
+    talk_header.appendChild(h2);
+    talk_header.appendChild(p);
+
+    //displaying messages
+    let talk_messages = document.createElement('div');
+    talk_messages.className = 'talk-messages';
+    for(message of talk) {
+        let message_div = document.createElement('div');
+        message_div.className = `message ${message[0]}`;
+        message_div.textContent = message[1];
+        talk_messages.appendChild(message_div);
+    }
+
+    talk_content.appendChild(talk_header);
+    talk_content.appendChild(talk_messages);
+
 }
 
 window.onload = () => {
     //Loading the interface
     showCurrentTalks();
+    showTalkContent(selected_talk);
 
     //setting up the 'Send' button
     let send_button = document.getElementsByClassName("message-send")[0];
@@ -61,4 +101,5 @@ window.onload = () => {
         talk.innerHTML += `<div class="message sent">${input.value}</div>`;
         input.value = "";
     });
+
 }

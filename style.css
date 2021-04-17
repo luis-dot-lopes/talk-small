@@ -18,7 +18,12 @@ nav {
 
 .talk {
     padding-left: 10px;
+    padding-top: 5px;
     border-bottom: solid #eee 2px;
+}
+
+.talk:hover {
+    background-color: #aaa;
 }
 
 .talk h3 {
