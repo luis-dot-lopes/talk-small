@@ -24,8 +24,7 @@ let selected_talk = 'John';
 //load talks on nav
 const showCurrentTalks = () => {
     let nav = document.getElementsByTagName('nav')[0];
-    for(talk_name in talks) {
-        console.log(talk_name); 
+    for(let talk_name in talks) {
         let talk = talks[talk_name];
         let talk_div = document.createElement('div');
         talk_div.className = 'talk';
@@ -41,6 +40,7 @@ const showCurrentTalks = () => {
         }
         talk_div.appendChild(h3_node);
         talk_div.appendChild(h4_node);
+        talk_div.addEventListener("click", () => showTalkContent(talk_name));
         nav.appendChild(talk_div);
     }
 }
@@ -49,6 +49,16 @@ const showTalkContent = (talk_name) => {
 
     let talk = talks[talk_name];
     let talk_content = document.getElementsByClassName('talk-content')[0];
+
+    //cleaning current talk
+    let old_talk_header = talk_content.getElementsByClassName('talk-header')[0];
+    if(old_talk_header) {
+        talk_content.removeChild(old_talk_header);
+    }
+    let old_talk_messages = talk_content.getElementsByClassName('talk-messages')[0];
+    if(old_talk_messages) {
+        talk_content.removeChild(old_talk_messages);
+    }
 
     //creating talk header
     let talk_header = document.createElement('div');
@@ -91,4 +101,5 @@ window.onload = () => {
         talk.innerHTML += `<div class="message sent">${input.value}</div>`;
         input.value = "";
     });
+
 }
