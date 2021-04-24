@@ -1,105 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+* {
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100vh;
+    width: 100vw;
+    margin: 0%;
+    padding: 0%;
+}
+
+header {
+    background-color: #0d5d84;
+    height: 10%;
+    display: flex;
+    align-items: center;
+}
 
 header h1 {
-    background-color: #3030ff;
-    padding: 15px 25px;
-    color: #ffffff;
-    font-family: arial;
-    text-shadow: -3px 3px 5px #000;
-    margin-bottom: 5px;
+    margin: 0%;
+    padding: 20px;
+    color: #FFFFFF;
+}
+
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 2.5fr;
+    height: 90%;
 }
 
 nav {
-    float: left;
-    width: 25%;
-    height: 84vh;
-    background-color: #ddd;
+    background-color: #0d5d843b;
     overflow-y: scroll;
 }
 
 .talk {
-    padding-left: 10px;
-    padding-top: 5px;
-    border-bottom: solid #eee 2px;
+    padding: 5px;
+    transition: 500ms;
 }
 
 .talk:hover {
-    background-color: #aaa;
-}
-
-.talk h3 {
-    font-weight: 400;
-}
-
-.talk h4 {
-    font-weight: 400;
+    background-color: #9fbdcc;
 }
 
 .talk-content {
-    float: right;
-    position: relative;
-    width: 75%;
-    height: 84vh;
-    background-color: #eaeaea;
-}
-
-.talk-header {
-    padding: 5px 25px;
-}
-
-.talk-header h2 {
-    margin: 3px 0px 0px 0px;
-}
-
-.talk-header p {
-    margin-top: 5px;
-}
-
-.talk-messages {
-    padding: 5px 25px;
-    height: 70%;
+    padding: 15px;
     overflow-y: scroll;
 }
 
-.message {
-    margin: 10px 0px;
-    padding: 10px;
-    border-radius: 5px;
-    width: max-content;
-    max-width: 50%;
-}
-
-.sent {
-    background-color: #6060ff;
-    float: right;
-    clear: right;
-}
-
-.received {
-    background-color: #ccc;
-    clear: right;
+.talk-header {
+    padding: 15px;
 }
 
 .talk-footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
-    width: 95%;
-    margin: 0px 0px 20px 10px;
     display: flex;
-    justify-content: center;
+    margin: 10px 0px;
+}
+
+.talk-messages {
+    display: flex;
+    flex-direction: column;
 }
 
 .message-input {
-    width: 80%; 
-    padding: 8px;
-    border: solid #aaa 2px;
-    border-radius: 5px;
+    padding: 10px 20px;
+    outline: none;
+    font-size: 13pt;
 }
 
 .message-send {
-    margin-left: 15px;
-    border-radius: 5px;
-    border: none;
+    padding: 10px 25px 10px 25px;
+    font-size: 13pt;
+}
+
+.message {
+    margin: 5px;
+    padding: 10px;
+    border-radius: 3px;
+}
+
+.sent {
+    text-align: right;
+    background-color: #31a1d8;
     color: #ffffff;
-    font-weight: 700;
-    background-color: #3030ff;
+    width: max-content;
+    align-self: flex-end;
+}
+
+.received {
+    text-align: left;
+    background-color: #1478a9;
+    color: #FFFFFF;
+    width: max-content;
 }
