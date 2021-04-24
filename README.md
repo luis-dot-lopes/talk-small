@@ -1,6 +1,6 @@
 <h1 align="center">Talk Small</h1>
 
-Este será um projeto web básico para praticar Node.js.
+Este é um projeto web básico para praticar Node.js.
 
 ## Front-end
 - Interface gráfica em desenvolvimento
