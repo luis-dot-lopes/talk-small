@@ -13,6 +13,10 @@ export class CreateUsers1619547896386 implements MigrationInterface {
                         isPrimary: true,
                     },
                     {
+                        name: "username",
+                        type: "varchar",
+                    },
+                    {
                         name: "email",
                         type: "varchar",
                     },
