@@ -18,12 +18,18 @@ class MessagesService {
 
     async create({ sender_id, receiver_id, text } : ICreateMessage) {
 
-        const message = this.messagesRepository.create({
+        const message = await this.messagesRepository.create({
             sender_id,
             receiver_id,
             text,
         });
 
+        await this.messagesRepository.save(message);
+
+        return message;
+
     }
 
 }
+
+export { MessagesService };
