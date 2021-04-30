@@ -17,7 +17,7 @@ export class CreateMessages1619657781235 implements MigrationInterface {
                         type: "uuid",
                     },
                     {
-                        name: "reciever_id",
+                        name: "receiver_id",
                         type: "uuid",
                     },
                     {
@@ -40,10 +40,10 @@ export class CreateMessages1619657781235 implements MigrationInterface {
                         onUpdate: "SET NULL",
                     },
                     {
-                        name: "FKReciever",
+                        name: "FKReceiver",
                         referencedTableName: "users",
                         referencedColumnNames: ["id"],
-                        columnNames: ["reciever_id"],
+                        columnNames: ["receiver_id"],
                         onDelete: "SET NULL",
                         onUpdate: "SET NULL",
                     },

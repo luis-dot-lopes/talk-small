@@ -15,12 +15,12 @@ class Message {
     @Column()
     sender_id: string;
 
-    @JoinColumn({ name: "reciever_id" })
+    @JoinColumn({ name: "receiver_id" })
     @ManyToOne(() => User)
-    reciever: User;
+    receiver: User;
     
     @Column()
-    reciever_id: string;
+    receiver_id: string;
 
     @Column()
     text: string;
