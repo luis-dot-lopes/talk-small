@@ -10,6 +10,8 @@ Para o back-end, os pacotes usados são Express, TypeORM e uuid. O banco de dado
 
 O código está escrito em inglês por preferência pessoal.
 
+Neste projeto, também partipa Jairo Silva: https://www.github.com/jairosilva2005
+
 English version:
 
 This will be a basic web project to practice Node.js.
@@ -21,3 +23,5 @@ was also implemented.
 For the back-end, the packages used are Express TypeORM and uuid. The database is sqlite.
 
 The code is written in English due to my personal preference.
+
+In this project, Jairo Silva also participates: https://www.github.com/jairosilva2005
