@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.register.css" />
+    <title>Talk Small | Register</title>
+  </head>
+  <body>
+    <div class="register">
+      <img src="./images/logo.png" alt="" class="logo" />
+      <input type="email" class="email" id="email" placeholder="Email adress" autocomplete="off" autofocus />
+      <input type="text" class="username" id="username" placeholder="Username" autocomplete="off" maxlength="45" />
+      <input type="password" class="password" id="password" placeholder="Password" />
+      <label for="password-verify" id="alert-pass" class="alert-pass">As senhas não coincidem!</label>
+      <input type="password" class="password-verify" id="password-verify" placeholder="Verify password" />
+      <input type="submit" class="submit" id="submit" value="Create account" />
+    </div>
+    <div class="alert">
+      Have an account?
+      <a class="register" href="./login.html">Sign in</a>
+    </div>
+  </body>
+  <script src="./validation.js"></script>
+</html>

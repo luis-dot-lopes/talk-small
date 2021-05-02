@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;700;800;900&display=swap');
+
+* {
+  font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.register {
+  display: flex;
+  flex-direction: column;
+  animation: show 500ms;
+  justify-content: center;
+}
+
+.register .email, .username, .password, .password-verify {
+  margin: 5px;
+  padding: 10px;
+  border: solid 1px #e6e6e6;
+  border-radius: 3px;
+  outline: none;
+  color: #555555;
+}
+
+.submit {
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+  outline: none;
+  color: #FFFFFF;
+  background-color: #0d5d84;
+  font-size: 11pt;
+  cursor: pointer;
+  transition: 500ms;
+}
+
+.submit:hover {
+  background-color: #127bb0;
+}
+
+.alert-pass {
+  display: none;
+  color: #e84853;
+  padding: 7px;
+}
+
+.logo {
+  height: 200px;
+  width: 200px;
+}
+
+
+.alert {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    padding: 10px;
+    background-color: #3cc260;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.register {
+    padding: 5px 10px;
+    margin-left: 10px;
+    background-color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+    border-radius: 2px;
+    text-decoration: none;
+    color: #000000;
+    font-size: 11pt;
+}
+
+.register:hover {
+    background-color: #f8f8f8;
+}
+
+@keyframes show {
+    0% {
+        transform: scale(0);
+    } 100% {
+        transform: scale(1);
+    }
+}

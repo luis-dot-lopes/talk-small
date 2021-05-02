@@ -1,12 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-</head>
-<body>
-    <form action="post">
-        
-    </form>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Talk Small | Login</title>
+    <link rel="icon" href="./images/icon.png" />
+    <link rel="stylesheet" href="./style.login.css" />
+  </head>
+  <body>
+    <div class="login">
+      <img src="./images/logo.png" alt="talk-small-logo" class="logo" />
+      <input
+        type="text"
+        id="username"
+        class="username"
+        placeholder="Username*"
+        autocomplete="off"
+        required
+      />
+      <input
+        type="password"
+        id="password"
+        class="password"
+        placeholder="Password*"
+        autocomplete="off"
+        required
+      />
+      <input type="submit" value="Login" class="submit" />
+    </div>
+    <div class="alert">
+      Don't have a account?
+      <a class="register" href="./register.html">Sign up</a>
+    </div>
+  </body>
 </html>
