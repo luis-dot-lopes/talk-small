@@ -34,7 +34,7 @@ class UsersController {
         const user = await usersService.findByEmail(email);
 
         if(user && user.password == password) {
-            return res.json(user);
+            return res.json({ user_id: user.id });
         } else {
             return res.json({ message: "wrong email or password"});
         }

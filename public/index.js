@@ -1,25 +1,6 @@
 //Talks will be hardcoded for testing
-const talks = {
-    'John' : [
-        ['sent', "Hello John."],
-        ['received', "Hello Luis. What's up?"],
-        ['sent', "I'm good, how about you?"],
-        ['received', "I'm doing well."]
-    ],
-    'Alice' : [
-        ['received', "Hi there Luis"],
-        ['sent', "Hello Alice. How are you doing?"],
-        ['received', "Good. Eating a lot of cakes"],
-        ['received', "And you? Still working on that app."],
-        ['sent', "Yeah. It's gonna be superb, super cool really"]
-    ],
-    'Hannah' : [
-        ['received', "Hey, are you good?"],
-        ['sent', "Hey Hannah. Yes, I'm well"],
-        ['received', "Ok. Bye"]
-    ]
-};
-let selected_talk = 'John';
+let talks = {};
+let selected_talk;
 
 //load talks on nav
 const showCurrentTalks = () => {
@@ -87,8 +68,44 @@ const showTalkContent = (talk_name) => {
 
 }
 
-window.onload = () => {
+const messagesToTalks = messages => {
+
+    console.log(messages);
+
+    const { sent_messages, received_messages } = messages;
+
+    for(let sent of sent_messages) {
+        if(talks[sent.receiver_name]) {
+            talks[sent.receiver_name].push(['sent', sent.text]);
+        } else {
+            talks[sent.receiver_name] = [['sent', sent.text]];
+        }
+        selected_talk = sent.receiver_name;
+    }
+
+    for(let received of received_messages) {
+        if(talks[received.sender_name]) {
+            talks[received.sender_name].push(['received', received.text]);
+        } else {
+            talks[received.sender_name] = [['received', received.text]];
+        }
+    }
+    console.log(talks);
+}
+
+window.onload = async () => {
+
+    //Fetching messages from the server
+    const user_id = sessionStorage.getItem("user_id");
+    const headers = new Headers({"Content-Type": "application/json"});
+
+    const messages = await fetch("listMessages", 
+        { method: "POST", headers, body: JSON.stringify({ user_id }) })
+    .then(async res => await res.json())
+    .catch(() => console.error("Error while loading messages"));
+
     //Loading the interface
+    messagesToTalks(messages);
     showCurrentTalks();
     showTalkContent(selected_talk);
 
@@ -98,7 +115,7 @@ window.onload = () => {
         let talk = document.getElementsByClassName("talk-messages")[0];
         let input = document.getElementsByClassName("message-input")[0];
         if(!(input.value == ""))
-        talk.innerHTML += `<div class="message sent">${input.value}</div>`;
+            talk.innerHTML += `<div class="message sent">${input.value}</div>`;
         input.value = "";
     });
 

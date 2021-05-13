@@ -7,27 +7,35 @@
     <title>Talk Small | Login</title>
     <link rel="icon" href="./images/icon.png" />
     <link rel="stylesheet" href="./style.login.css" />
+    <script src="login.js"></script>
   </head>
   <body>
     <div class="login">
-      <img src="./images/logo.png" alt="talk-small-logo" class="logo" />
-      <input
-        type="text"
-        id="username"
-        class="username"
-        placeholder="Username*"
-        autocomplete="off"
-        required
-      />
-      <input
-        type="password"
-        id="password"
-        class="password"
-        placeholder="Password*"
-        autocomplete="off"
-        required
-      />
-      <input type="submit" value="Login" class="submit" />
+      <img src="./images/logo.png" alt="talk-small-logo" class="logo" /><br>
+      <form action="">
+        <input
+          type="text"
+          id="email"
+          class="email"
+          name="email"
+          placeholder="Email*"
+          autocomplete="off"
+          required
+        /><br>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          class="password"
+          placeholder="Password*"
+          autocomplete="off"
+          required
+        /><br>
+        <p id="error" style="visibility: hidden;">
+          Invalid email or password
+        </p>
+        <input type="button" value="Login" class="submit" onclick="makeRequest()" />
+      </form>
     </div>
     <div class="alert">
       Don't have a account?

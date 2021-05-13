@@ -25,6 +25,17 @@ class MessagesController {
         }
 
     }
+
+    async listByUser(req: Request, res: Response) {
+        
+        const { user_id } = req.body;
+        const messagesService = new MessagesService();
+
+        const messages = await messagesService.listByUser(user_id);
+        
+        return res.json(messages);
+
+    }
 }
 
 export { MessagesController };
