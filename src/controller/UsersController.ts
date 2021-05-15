@@ -22,7 +22,7 @@ class UsersController {
             username,
         });
 
-        return res.json(user);
+        return res.json({ user_id: user.id });
     }
 
     async loginIn(req: Request, res: Response) {

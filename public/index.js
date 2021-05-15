@@ -28,7 +28,12 @@ const showCurrentTalks = () => {
 
 const showTalkContent = (talk_name) => {
 
-    let talk = talks[talk_name];
+    let talk = talks[talk_name].sort((m1, m2) => {
+        if (m1[2] < m2[2]) return -1;
+        else if(m1[2] == m2[2]) return 0;
+        else return 1;
+    });
+    console.log(talk);
     let talk_content = document.getElementsByClassName('talk-content')[0];
 
     //cleaning current talk
@@ -70,24 +75,22 @@ const showTalkContent = (talk_name) => {
 
 const messagesToTalks = messages => {
 
-    console.log(messages);
-
     const { sent_messages, received_messages } = messages;
 
     for(let sent of sent_messages) {
         if(talks[sent.receiver_name]) {
-            talks[sent.receiver_name].push(['sent', sent.text]);
+            talks[sent.receiver_name].push(['sent', sent.text, sent.created_at]);
         } else {
-            talks[sent.receiver_name] = [['sent', sent.text]];
+            talks[sent.receiver_name] = [['sent', sent.text, sent.created_at]];
         }
         selected_talk = sent.receiver_name;
     }
 
     for(let received of received_messages) {
         if(talks[received.sender_name]) {
-            talks[received.sender_name].push(['received', received.text]);
+            talks[received.sender_name].push(['received', received.text, received.created_at]);
         } else {
-            talks[received.sender_name] = [['received', received.text]];
+            talks[received.sender_name] = [['received', received.text, received.created_at]];
         }
     }
     console.log(talks);
