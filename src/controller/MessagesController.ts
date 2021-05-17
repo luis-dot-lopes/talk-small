@@ -33,9 +33,12 @@ class MessagesController {
     async listByUser(req: Request, res: Response) {
         
         const { user_id } = req.body;
+
+        const real_id = UsersController.active_sessions.find(session => session.id == user_id).user_id;
+
         const messagesService = new MessagesService();
 
-        const messages = await messagesService.listByUser(user_id);
+        const messages = await messagesService.listByUser(real_id);
         
         return res.json(messages);
 

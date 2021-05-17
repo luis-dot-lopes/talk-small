@@ -34,6 +34,8 @@ class UsersController {
         const session: IUserSession = { user_id: user.id, id: uuid() };
 
         UsersController.active_sessions.push(session);
+        
+        console.log(session.id);
 
         return res.json({ user_id: session.id });
     }
@@ -47,7 +49,14 @@ class UsersController {
         const user = await usersService.findByEmail(email);
 
         if(user && user.password == password) {
-            return res.json({ user_id: user.id });
+
+            const session: IUserSession = { user_id: user.id, id: uuid() };
+
+            UsersController.active_sessions.push(session);
+
+            console.log(session.id);
+
+            return res.json({ user_id: session.id });
         } else {
             return res.json({ message: "wrong email or password"});
         }
