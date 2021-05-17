@@ -33,7 +33,7 @@ const showTalkContent = (talk_name) => {
         else if(m1[2] == m2[2]) return 0;
         else return 1;
     });
-    console.log(talk);
+
     let talk_content = document.getElementsByClassName('talk-content')[0];
 
     //cleaning current talk
@@ -74,6 +74,8 @@ const showTalkContent = (talk_name) => {
 }
 
 const messagesToTalks = messages => {
+
+    console.log(messages);
 
     const { sent_messages, received_messages } = messages;
 

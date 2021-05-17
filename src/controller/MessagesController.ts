@@ -1,20 +1,24 @@
 import { Request, Response } from "express";
 import { MessagesService } from "../services/MessagesService";
 import { UsersService } from "../services/UsersService";
+import { UsersController } from "./UsersController";
 
 class MessagesController {
     async create(req: Request, res: Response) {
-        const { sender_id, receiver_id, text } = req.body;
+
+        const { session_id, receiver_id, text } = req.body;
 
         const messagesService = new MessagesService();
         const usersService = new UsersService();
 
-        const senderExists = await usersService.findByID(sender_id);
+        const senderLogged = UsersController.active_sessions.find(session => session.id === session_id);
         const receiverExists = await usersService.findByID(receiver_id);
+
+        const senderExists = senderLogged ? senderLogged.user_id : undefined;
 
         if(senderExists && receiverExists) {
             const message = await messagesService.create({
-                sender_id,
+                sender_id: senderExists,
                 receiver_id,
                 text,
             });

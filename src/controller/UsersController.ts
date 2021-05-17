@@ -1,7 +1,16 @@
 import { Request, Response } from "express";
 import { UsersService } from "../services/UsersService";
+import { v4 as uuid } from "uuid";
+
+interface IUserSession {
+    id: string;
+    user_id: string;
+}
 
 class UsersController {
+
+    static active_sessions: IUserSession[] = [];
+
     async create(req: Request, res: Response) {
         
         const { email, password, username } = req.body;
@@ -22,7 +31,11 @@ class UsersController {
             username,
         });
 
-        return res.json({ user_id: user.id });
+        const session: IUserSession = { user_id: user.id, id: uuid() };
+
+        UsersController.active_sessions.push(session);
+
+        return res.json({ user_id: session.id });
     }
 
     async loginIn(req: Request, res: Response) {
