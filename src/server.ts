@@ -1,25 +1,6 @@
-import express from "express";
-import path from 'path';
-import { router } from "./routes";
-import bodyParser from "body-parser";
-import './database';
 
-const app = express();
+import { http } from "./http";
 
-const port = 3000;
-
-app.use(express.json());
-
-app.use(router);
-
-app.use(express.static(path.join(__dirname, '..', 'public')));
-
-app.set("views", path.join(__dirname, '..', 'public'));
-
-app.engine("html", require('ejs').renderFile);
-
-app.set("view engine", "html");
-
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}/`);
-});
+http.listen(3000, () => {
+    console.log(`Server running on localhost:3000`);
+})
