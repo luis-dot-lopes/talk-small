@@ -8,7 +8,7 @@ conversas também foi implementado.
 
 Para o back-end, os pacotes usados são Express, TypeORM e uuid. O banco de dados é sqlite.
 
-O código está escrito em inglês por preferência pessoal.
+O código está escrito em inglês por preferência pessoal e acessibilidade.
 
 Neste projeto, também partipa Jairo Silva: https://www.github.com/jairosilva2005
 
@@ -22,6 +22,6 @@ was also implemented.
 
 For the back-end, the packages used are Express TypeORM and uuid. The database is sqlite.
 
-The code is written in English due to my personal preference.
+The code is written in English due to my personal preference and accessibility.
 
 In this project, Jairo Silva also participates: https://www.github.com/jairosilva2005
