@@ -32,6 +32,8 @@ class MessagesController {
 
     async listByUser(req: Request, res: Response) {
         
+        console.log(req.body);
+
         const { user_id } = req.body;
 
         const real_id = UsersController.active_sessions.find(session => session.id == user_id).user_id;

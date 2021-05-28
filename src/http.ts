@@ -22,4 +22,8 @@ app.set("view engine", "html");
 const http = createServer(app);
 const io = new Server(http);
 
+io.on("connection", socket => {
+    console.log("User connected");
+});
+
 export { io, http };

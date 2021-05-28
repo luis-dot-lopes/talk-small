@@ -42,10 +42,12 @@ class MessagesService {
 
         for(let message of sent_messages_raw) {
             const receiver_name = message.receiver.username;
+            const contact_id = message.receiver.id;
             sent_messages.push({ 
                 text: message.text,
                 created_at: message.created_at,
                 receiver_name,
+                contact_id,
             })
         }
         
@@ -58,10 +60,12 @@ class MessagesService {
 
         for(let message of received_messages_raw) {
             const sender_name = message.sender.username;
+            const contact_id = message.sender.id;
             received_messages.push({ 
                 text: message.text,
                 created_at: message.created_at,
                 sender_name,
+                contact_id,
             })
         }
 
