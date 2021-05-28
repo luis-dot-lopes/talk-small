@@ -28,6 +28,8 @@ const showCurrentTalks = () => {
 
 const showTalkContent = (talk_name) => {
 
+    selected_talk = talk_name;
+
     let talk = talks[talk_name].messages.sort((m1, m2) => {
         if (m1[2] < m2[2]) return -1;
         else if(m1[2] == m2[2]) return 0;
@@ -130,7 +132,7 @@ window.onload = async () => {
             talk.innerHTML += `<div class="message sent">${input.value}</div>`;
             socket.emit("message", {
                 text: input.value,
-                sender_session: sessionStorage.getItem('user_id'),
+                session_id: sessionStorage.getItem('user_id'),
                 receiver_id: talks[selected_talk].contact_id,
             });
         }

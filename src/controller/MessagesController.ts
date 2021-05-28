@@ -3,10 +3,15 @@ import { MessagesService } from "../services/MessagesService";
 import { UsersService } from "../services/UsersService";
 import { UsersController } from "./UsersController";
 
-class MessagesController {
-    async create(req: Request, res: Response) {
+interface ICreateMessage {
+    session_id: string;
+    receiver_id: string;
+    text: string;
+}
 
-        const { session_id, receiver_id, text } = req.body;
+class MessagesController {
+    
+    async create({session_id, receiver_id, text} : ICreateMessage) {
 
         const messagesService = new MessagesService();
         const usersService = new UsersService();
@@ -23,9 +28,9 @@ class MessagesController {
                 text,
             });
 
-            return res.json(message);
+            return message;
         } else {
-            return res.json({ message: "Sender or receiver doesn't exist" });
+            return { error: "Sender or receiver doesn't exist" };
         }
 
     }
