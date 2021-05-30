@@ -72,9 +72,8 @@ const showTalkContent = (talk_name) => {
         talk_messages.appendChild(message_div);
     }
 
-    talk_content.appendChild(talk_header);
-    talk_content.appendChild(talk_messages);
-
+    talk_content.prepend(talk_messages);
+    talk_content.prepend(talk_header);
 }
 
 const messagesToTalks = messages => {
