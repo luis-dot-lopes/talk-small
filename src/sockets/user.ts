@@ -12,7 +12,6 @@ io.on("connect", socket => {
     console.log("connected");
     socket.on("loggedIn", ({ user_id }) => { 
         sockets[user_id] = socket;
-        console.log(sockets);
     });
     socket.on("message", async (message, fn) => {
         const new_message = await messagesController.create(message);
