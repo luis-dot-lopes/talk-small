@@ -12,6 +12,7 @@ const makeRequest = async () => {
 
     if(json.user_id) {
         window.sessionStorage.setItem("user_id", json.user_id);
+        window.sessionStorage.setItem("raw_id", json.raw_id);
 
         window.location = "/talks";
     } else {

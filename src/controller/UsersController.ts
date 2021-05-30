@@ -56,7 +56,7 @@ class UsersController {
 
             console.log(session.id);
 
-            return res.json({ user_id: session.id });
+            return res.json({ user_id: session.id, raw_id: session.user_id });
         } else {
             return res.json({ message: "wrong email or password"});
         }

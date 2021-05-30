@@ -5,6 +5,7 @@ let selected_talk;
 //load talks on nav
 const showCurrentTalks = () => {
     let nav = document.getElementsByTagName('nav')[0];
+    nav.innerHTML = "";
     for(let talk_name in talks) {
         let talk = talks[talk_name].messages;
         let talk_div = document.createElement('div');
@@ -134,6 +135,8 @@ window.onload = async () => {
                 text: input.value,
                 session_id: sessionStorage.getItem('user_id'),
                 receiver_id: talks[selected_talk].contact_id,
+            }, (message) => {
+                messagesToTalks(message);
             });
         }
         input.value = "";

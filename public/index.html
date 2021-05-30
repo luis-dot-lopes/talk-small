@@ -22,6 +22,16 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
         var socket = io();
+        socket.emit("loggedIn", {
+            user_id: sessionStorage.getItem("raw_id"),
+        });
+        socket.on("message-received", (message) => {
+            messagesToTalks(message);
+            showCurrentTalks();
+            showTalkContent(selected_talk);
+            console.log(message);
+            console.log("received message");
+        });
     </script>
 </body>
 </html>
