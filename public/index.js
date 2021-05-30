@@ -74,6 +74,7 @@ const showTalkContent = (talk_name) => {
 
     talk_content.prepend(talk_messages);
     talk_content.prepend(talk_header);
+    talk_messages.scrollBy(0, talk_messages.scrollHeight);
 }
 
 const messagesToTalks = messages => {
@@ -136,6 +137,8 @@ window.onload = async () => {
                 receiver_id: talks[selected_talk].contact_id,
             }, (message) => {
                 messagesToTalks(message);
+                showCurrentTalks();
+                showTalkContent(selected_talk);
             });
         }
         input.value = "";
