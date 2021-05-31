@@ -94,13 +94,14 @@ nav {
   margin: 5px;
   padding: 10px;
   border-radius: 3px;
+  max-width: 300px;
+  overflow-wrap: break-word;
 }
 
 .sent {
   text-align: right;
   background-color: #31a1d8;
   color: #ffffff;
-  width: max-content;
   align-self: flex-end;
 }
 
