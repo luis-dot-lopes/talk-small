@@ -9,6 +9,8 @@
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "reflect-metadata": "^0.1.13",
+    "socket.io": "^4.1.2",
+    "socket.io-client": "^4.1.2",
     "sqlite3": "^5.0.2",
     "ts-node-dev": "^1.1.6",
     "typeorm": "^0.2.32",
@@ -30,6 +32,7 @@
   },
   "homepage": "https://github.com/luis-dot-lopes/talk-small#readme",
   "devDependencies": {
+    "@types/socket.io": "^3.0.2",
     "@types/uuid": "^8.3.0"
   }
 }

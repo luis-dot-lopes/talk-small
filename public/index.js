@@ -1,31 +1,13 @@
 //Talks will be hardcoded for testing
-const talks = {
-    'John' : [
-        ['sent', "Hello John."],
-        ['received', "Hello Luis. What's up?"],
-        ['sent', "I'm good, how about you?"],
-        ['received', "I'm doing well."]
-    ],
-    'Alice' : [
-        ['received', "Hi there Luis"],
-        ['sent', "Hello Alice. How are you doing?"],
-        ['received', "Good. Eating a lot of cakes"],
-        ['received', "And you? Still working on that app."],
-        ['sent', "Yeah. It's gonna be superb, super cool really"]
-    ],
-    'Hannah' : [
-        ['received', "Hey, are you good?"],
-        ['sent', "Hey Hannah. Yes, I'm well"],
-        ['received', "Ok. Bye"]
-    ]
-};
-let selected_talk = 'John';
+let talks = {};
+let selected_talk;
 
 //load talks on nav
 const showCurrentTalks = () => {
     let nav = document.getElementsByTagName('nav')[0];
+    nav.innerHTML = "";
     for(let talk_name in talks) {
-        let talk = talks[talk_name];
+        let talk = talks[talk_name].messages;
         let talk_div = document.createElement('div');
         talk_div.className = 'talk';
         let person_name = talk_name;
@@ -47,7 +29,14 @@ const showCurrentTalks = () => {
 
 const showTalkContent = (talk_name) => {
 
-    let talk = talks[talk_name];
+    selected_talk = talk_name;
+
+    let talk = talks[talk_name].messages.sort((m1, m2) => {
+        if (m1[2] < m2[2]) return -1;
+        else if(m1[2] == m2[2]) return 0;
+        else return 1;
+    });
+
     let talk_content = document.getElementsByClassName('talk-content')[0];
 
     //cleaning current talk
@@ -75,6 +64,7 @@ const showTalkContent = (talk_name) => {
     //displaying messages
     let talk_messages = document.createElement('div');
     talk_messages.className = 'talk-messages';
+    console.log(talk);
     for(message of talk) {
         let message_div = document.createElement('div');
         message_div.className = `message ${message[0]}`;
@@ -82,13 +72,55 @@ const showTalkContent = (talk_name) => {
         talk_messages.appendChild(message_div);
     }
 
-    talk_content.appendChild(talk_header);
-    talk_content.appendChild(talk_messages);
-
+    talk_content.prepend(talk_messages);
+    talk_content.prepend(talk_header);
+    talk_messages.scrollBy(0, talk_messages.scrollHeight);
 }
 
-window.onload = () => {
+const messagesToTalks = messages => {
+
+    console.log(messages);
+
+    const { sent_messages, received_messages } = messages;
+
+    for(let sent of sent_messages) {
+        if(talks[sent.receiver_name]) {
+            talks[sent.receiver_name].messages.push(['sent', sent.text, sent.created_at]);
+        } else {
+            talks[sent.receiver_name] = {
+                contact_id: sent.contact_id,
+                messages: [['sent', sent.text, sent.created_at]],
+            };
+        }
+        selected_talk = sent.receiver_name;
+    }
+
+    for(let received of received_messages) {
+        if(talks[received.sender_name]) {
+            talks[received.sender_name].messages.push(['received', received.text, received.created_at]);
+        } else {
+            talks[received.sender_name] = {
+                contact_id: received.contact_id,
+                messages: [['received', received.text, received.created_at]],
+            };
+        }
+    }
+    console.log(talks);
+}
+
+window.onload = async () => {
+
+    //Fetching messages from the server
+    const user_id = sessionStorage.getItem("user_id");
+    const headers = new Headers({"Content-Type": "application/json"});
+
+    const messages = await fetch("listMessages", 
+        { method: "POST", headers, body: JSON.stringify({ user_id }) })
+    .then(async res => await res.json())
+    .catch(() => console.error("Error while loading messages"));
+
     //Loading the interface
+    messagesToTalks(messages);
     showCurrentTalks();
     showTalkContent(selected_talk);
 
@@ -97,8 +129,18 @@ window.onload = () => {
     send_button.addEventListener("click", () => {
         let talk = document.getElementsByClassName("talk-messages")[0];
         let input = document.getElementsByClassName("message-input")[0];
-        if(!(input.value == ""))
-        talk.innerHTML += `<div class="message sent">${input.value}</div>`;
+        if(!(input.value == "")) {
+            talk.innerHTML += `<div class="message sent">${input.value}</div>`;
+            socket.emit("message", {
+                text: input.value,
+                session_id: sessionStorage.getItem('user_id'),
+                receiver_id: talks[selected_talk].contact_id,
+            }, (message) => {
+                messagesToTalks(message);
+                showCurrentTalks();
+                showTalkContent(selected_talk);
+            });
+        }
         input.value = "";
     });
 

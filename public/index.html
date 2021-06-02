@@ -14,10 +14,24 @@
         <nav></nav>
         <div class="talk-content">
             <div class="talk-footer">
-                <input type="text" name="message-input" class="message-input" placeholder="Message" />
+                <input type="text" name="message-input" id="message-input" class="message-input" placeholder="Message" />
                 <button class="message-send">Send</button>
             </div>
         </div>
     </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+        socket.emit("loggedIn", {
+            user_id: sessionStorage.getItem("raw_id"),
+        });
+        socket.on("message-received", (message) => {
+            messagesToTalks(message);
+            showCurrentTalks();
+            showTalkContent(selected_talk);
+            console.log(message);
+            console.log("received message");
+        });
+    </script>
 </body>
 </html>
