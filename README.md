@@ -2,8 +2,8 @@
 
 Este será um projeto web básico para praticar Node.js.
 
-O front-end não utiliza, por enquanto, qualquer framework JavaScript, e a 
-interface básica para mostrar as mensagens já está implementada. Trocar entre as 
+O front-end não utiliza, por enquanto, qualquer framework JavaScript, e a
+interface básica para mostrar as mensagens já está implementada. Trocar entre as
 conversas também foi implementado.
 
 Para o back-end, os pacotes usados são Express, TypeORM e uuid. O banco de dados é sqlite.
