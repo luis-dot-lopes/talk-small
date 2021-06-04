@@ -16,6 +16,7 @@ router.get("/talks", (req, res) => {
 });
 
 router.get("favicon.ico", (req, res) => res.sendFile("images/icon.png"));
+router.get("/test-react", (req, res) => res.json({ message : "Hello from the api" }));
 
 router.post("/signup", usersController.create);
 router.post("/login", usersController.loginIn);
