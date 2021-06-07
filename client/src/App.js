@@ -7,8 +7,12 @@ function App() {
 
   const [data, setData] = React.useState(null);
 
+  const user_id = sessionStorage.getItem("user_id");
+  const headers = new Headers({"Content-Type": "application/json"});
+
   React.useEffect(() => {
-    fetch("http://localhost:3001/test-react")
+    fetch("http://localhost:3001/listMessages", 
+      { method: "POST", headers, body: JSON.stringify({ user_id })})
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -17,10 +21,12 @@ function App() {
       .catch(e => console.error(e));
   }, []);
 
+  console.log(data);
+
   return (
     <div className="main">
       <header>
-          <h1>Talking Small: { !data ? "Loading..." : data}</h1>
+          <h1>Talking Small</h1>
       </header>
       <div className="container">
           <nav className="nav"></nav>
