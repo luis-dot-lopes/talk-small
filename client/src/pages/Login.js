@@ -25,7 +25,7 @@ const makeRequest = async () => {
 function Login() {
     return (
         <div className="login">
-            <img src="images/talk-small-logo.png" alt="talk-small-logo" class="logo" /><br></br>
+            <img src="images/talk-small-logo.png" alt="talk-small-logo" className="logo" /><br></br>
             <form action="">
                 <input
                 type="text"

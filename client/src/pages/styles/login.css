@@ -12,11 +12,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #f9fcff;
 }
 
 .logo {
-  height: 200px;
-  width: 200px;
+  height: 25vw;
+  width: 25vw;
 }
 
 .login {
@@ -29,6 +30,7 @@ body {
 
 .login .email,
 .password {
+  width: 25vw;
   margin: 5px;
   padding: 0.9em;
   font-size: 1rem;
