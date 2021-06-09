@@ -2,7 +2,7 @@
 
 Este será um projeto web básico para praticar Node.js.
 
-O front-end não utiliza, por enquanto, qualquer framework JavaScript, e a
+O front-end está sendo refatorado para utilizar React, e a
 interface básica para mostrar as mensagens já está implementada. Trocar entre as
 conversas também foi implementado.
 
@@ -16,7 +16,7 @@ English version:
 
 This will be a basic web project to practice Node.js.
 
-The front-end doesn't utilize, at the moment, any JavaScript framework, and the
+The front-end is being refactored to use React, and the
 basic interface to show messages is already implemented. Switching between talks
 was also implemented.
 
