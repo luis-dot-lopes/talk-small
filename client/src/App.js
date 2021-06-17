@@ -3,6 +3,10 @@ import './App.css';
 import TalkCard from './components/talk.card';
 import MessageSent from './components/message.sent';
 import MessageReceived from './components/message.received';
+import io from 'socket.io-client';
+
+let socket = io('http://localhost:3001');
+let loaded_talks = null;
 
 const messagesToTalks = (messages, talks) => {
 
@@ -37,9 +41,11 @@ const messagesToTalks = (messages, talks) => {
     return talks;
 }
 
-const loadTalks = (data) => {
+const loadTalks = (data, old_talks) => {
 
-  const talks = messagesToTalks(data, {});
+  console.log(old_talks);
+
+  const talks = messagesToTalks(data, old_talks);
   console.log(talks);
   for(let talk in talks) {
     talks[talk].messages.sort((m1, m2) => {
@@ -83,7 +89,17 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
+
     this.state = {talks: null, current_talk: null};
+
+    socket.emit("loggedIn", {
+      user_id: sessionStorage.getItem("raw_id"),
+    }, data => console.log(`Emitted. Result ${data}`));
+
+
+    console.log(socket);
+
+    console.log("constructed");
 
   }
 
@@ -97,27 +113,41 @@ class App extends React.Component {
       .then((res) => res.json())
       .then((newData) => {
         console.log(`Data: ${newData}`);
-        const talks = loadTalks(newData);
+        const talks = loadTalks(newData, {});
         const current_talk = Object.keys(talks)[0];
         this.setState({ talks, current_talk });
+        loaded_talks = talks;
       })
       .catch(e => console.error(e));
+
+    socket.on("message-received", (message) => {
+      console.log(this);
+      const talks = loadTalks(message, loaded_talks);
+      this.setState({ talks });
+      loaded_talks = talks;
+      console.log(message);
+      console.log("received message");
+    });
 
   }
 
   sendMessage() {
-    const first_talk = Object.keys(this.state.talks)[0];
 
     const text = document.querySelector("#message-input").value;
     document.querySelector("#message-input").value = "";
 
-    const talks = this.state.talks;
-    
-    talks[first_talk].messages.push(['sent', text, new Date().toDateString()]);
+    socket.emit("message", {
+      text,
+      session_id: sessionStorage.getItem('user_id'),
+      receiver_id: this.state.talks[this.state.current_talk].contact_id,
+    }, (message) => {
+      const talks = loadTalks(message, this.state.talks);
+      this.setState({ talks });
+      loaded_talks = talks;
+    });
 
-    this.setState({ talks });
   }
-  
+
   render() {
 
     console.log("rendering");

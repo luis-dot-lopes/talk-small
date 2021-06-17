@@ -71,8 +71,6 @@ class MessagesService {
 
         const messages = { sent_messages, received_messages };
 
-        console.log(messages);
-
         return messages;
         
     }

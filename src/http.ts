@@ -26,7 +26,12 @@ app.engine("html", require('ejs').renderFile);
 app.set("view engine", "html");
 
 const http = createServer(app);
-const io = new Server(http);
+const io = new Server(http, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+  }
+});
 
 io.on("connection", socket => {
     console.log("User connected");
