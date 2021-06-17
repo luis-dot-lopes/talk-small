@@ -37,7 +37,7 @@ class MessagesController {
 
     async listByUser(req: Request, res: Response) {
         
-        console.log(req.body);
+        console.log(`Listing for ${req.body}`);
 
         const { user_id } = req.body;
 

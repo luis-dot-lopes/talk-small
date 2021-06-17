@@ -10,8 +10,10 @@ const sockets = [];
 
 io.on("connect", socket => {
     console.log("connected");
-    socket.on("loggedIn", ({ user_id }) => { 
+    socket.on("loggedIn", ({ user_id }, fn) => { 
+        console.log("user logged");
         sockets[user_id] = socket;
+        fn("Hello");
     });
     socket.on("message", async (message, fn) => {
         const new_message = await messagesController.create(message);

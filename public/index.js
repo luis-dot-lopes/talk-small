@@ -105,7 +105,6 @@ const messagesToTalks = messages => {
             };
         }
     }
-    console.log(talks);
 }
 
 window.onload = async () => {
