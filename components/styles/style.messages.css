@@ -1,0 +1,43 @@
+.message {
+  text-align: justify;
+  font-weight: 500;
+  color: #FFF;
+
+  margin-bottom: 5px;
+  padding: 12px;
+  
+  max-width: 30em;
+  overflow-wrap: break-word;
+  
+  display: flex;
+  flex-direction: column;
+  
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.sent {
+  background-color: #ff6161;
+  align-self: flex-end;
+  border-top-left-radius: 10px;
+}
+
+.received {
+  background-color: #b669ff;
+  width: max-content;
+  border-top-right-radius: 10px;
+}
+
+.date {
+  margin-top: 0.5em;
+  font-size: smaller;
+  color: #FFF;
+}
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
