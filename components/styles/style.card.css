@@ -1,0 +1,43 @@
+.talk {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	height: 6em;
+	padding: 0.5em;
+	border-bottom: solid 2px #F1F1F1;
+	width: 100%;
+}
+
+.talk:hover {
+	background-color: #e9ecef;
+}
+
+.talk svg {
+	width: 3em;
+	height: 3em;
+}
+
+.info {
+	display: flex;
+	flex-direction: column;
+	align-items: end;
+	margin-left: 0.8em;
+}
+
+.info h3, h4 {
+	margin: 0;
+	font-family: "Comic Neue", sans-serif;
+}
+
+.info h3 {
+	font-size: 1em;
+	font-weight: 600;
+	margin-bottom: 0.5em;
+	color: #b669ff;
+}
+
+.info h4 {
+	font-size: 0.9em;
+	font-weight: 600;
+	color: #888;
+}

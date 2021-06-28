@@ -1,0 +1,163 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+* {
+  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #f9fcff;
+}
+
+.main {
+  height: 100vh;
+  width: 100vw;
+  margin: 0%;
+  padding: 0%;
+  background-color: #FFF;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.chat {
+  width: 100%;
+}
+
+.chat-small {
+  font-size: 1.5em;
+  padding: 1em;
+}
+
+.chat-small:before {
+  content: '💬';
+  margin-right: 1em;
+}
+
+.nav {
+  background-color: #f8f9fa;
+  overflow-y: scroll;
+  height: revert;
+  width: 35%;
+  border-right: solid 2px #F1F1F1;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+}
+
+.talk-content {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  height: 80vh;
+}
+
+.talk-content::-webkit-scrollbar, .nav::-webkit-scrollbar {
+    display: none;
+}
+
+.talk-header {
+  background-color: #F9F9F9;
+  box-shadow: 0 0 1em #FFF;
+  position: relative;
+  padding: 1em;
+  width: auto;
+  height: min-content;
+  display: flex;
+  flex-direction: row;
+}
+
+.talk-header h3 {
+  margin: 0;
+  font-family: "Comic Neue", sans-serif;
+  font-size: 1.4em;
+}
+
+.to-username {
+  color: #ff6161;
+}
+
+.from-username {
+  color: #b669ff;
+}
+
+.to, .from smaller {
+  color: #555;
+}
+
+.talk-header .from {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 50%;
+}
+
+.talk-header .to {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 50%;
+}
+
+.talk-footer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.talk-footer svg {
+  width: 6%;
+  fill: #DDD;
+  cursor: pointer;
+}
+
+.talk-footer svg:hover {
+  fill: #999;
+}
+
+.talk-messages {
+  display: flex;
+  flex-direction: column;
+  max-height: 370px;
+  overflow-y: scroll;
+}
+
+.message-input {
+  padding: 0.60em 1em;
+  outline: none;
+  font-size: 1.1em;
+  width: 100%;
+  border: solid 2px #F1F1F1;
+  background-color: #FFF;
+  color: #555;
+  font-weight: 500;
+}
+
+.message-send {
+  padding: 0.60em 1.60em;
+  font-size: 1.1em;
+  background-color: #0ed6e0;
+  color: #FFF;
+  border: solid 2px rgba(0, 0, 0, 0.00);
+  outline: none;
+  transition: 500ms;
+  cursor: pointer;
+  width: 10%;
+}
+
+.message-send:hover {
+  background-color: #F1F1F2;
+  color: #0ed6e0;
+}
