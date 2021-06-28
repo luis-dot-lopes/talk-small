@@ -5,6 +5,7 @@ export default (props) => {
 	return (
 		<div className="message received">
 			{props.content}
+			<smaller className="date left">12:54</smaller>
 		</div>
 	);
 }

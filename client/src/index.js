@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import Login from './pages/Login';
+import {Login, Register} from './pages/Acess';
 
 function Index() {
   if (window.sessionStorage.getItem('user_id')) {
