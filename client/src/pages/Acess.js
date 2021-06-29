@@ -1,6 +1,6 @@
 import './styles/style.acess.css';
 
-const makeRequest = async () => {
+const makeLoginRequest = async () => {
 
     const email = document.querySelector("#email").value;
     const password = document.querySelector("#password").value;
@@ -47,7 +47,7 @@ function Login() {
                 <p id="error" style={{ visibility: 'hidden' }}>
                     Invalid email or password
                 </p>
-                <input type="button" value="Login" className="submit" onClick={makeRequest} />
+                <input type="button" value="Login" className="submit" onClick={makeLoginRequest} />
             </form>
             <div className="alert">
                 Don't have a account?
@@ -55,6 +55,28 @@ function Login() {
             </div>
         </div>
     );
+}
+
+const makeRegisterRequest = async () => {
+
+    const email = document.querySelector("#email").value;
+    const password = document.querySelector("#password").value;
+    const username = document.querySelector("#username").value;
+
+    const headers = new Headers({ "Content-Type": "application/json" });
+    const req = await fetch("http://localhost:3001/signup", 
+        { method: "POST", headers, body: JSON.stringify({ email, password, username }) });
+    
+    const json = await req.json();
+
+    if(json.user_id) {
+        window.sessionStorage.setItem("user_id", json.user_id);
+
+        window.location = "/talks";
+    } else {
+        document.querySelector("#error").style = "color: red;";
+    }
+
 }
 
 function Register() {
@@ -97,6 +119,7 @@ function Register() {
                             type="button"
                             value="Register"
                             className="submit"
+                            onClick={makeRegisterRequest}
                         />
                 </form>
             </div>

@@ -11,6 +11,32 @@ interface ICreateMessage {
 
 class MessagesController {
     
+    async createFromReq(req: Request, res: Response) {
+
+        const { session_id, receiver_id, text } = req.body;
+
+        const messagesService = new MessagesService();
+        const usersService = new UsersService();
+
+        const senderLogged = UsersController.active_sessions.find(session => session.id === session_id);
+        const receiverExists = await usersService.findByID(receiver_id);
+
+        const senderExists = senderLogged ? senderLogged.user_id : undefined;
+
+        if(senderExists && receiverExists) {
+            const message = await messagesService.create({
+                sender_id: senderExists,
+                receiver_id,
+                text,
+            });
+
+            return res.json(message);
+        } else {
+            return res.json({ error: "Sender or receiver doesn't exist" });
+        }
+
+    }
+
     async create({session_id, receiver_id, text} : ICreateMessage) {
 
         const messagesService = new MessagesService();

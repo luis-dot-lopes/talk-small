@@ -19,7 +19,7 @@ router.get("favicon.ico", (req, res) => res.sendFile("images/icon.png"));
 
 router.post("/signup", usersController.create);
 router.post("/login", usersController.loginIn);
-router.post("/send", messagesController.create);
+router.post("/send", messagesController.createFromReq);
 router.post("/listMessages", messagesController.listByUser);
 
 export { router };

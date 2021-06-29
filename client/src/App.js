@@ -156,7 +156,7 @@ class App extends React.Component {
     let talk_cards = null;
     let talk_messages = null;
 
-    if (this.state.talks != null) {
+    if (this.state.talks != null && Object.keys(this.state.talks).length !== 0) {
       talk_cards = loadTalkCards(this.state.talks, this);
       talk_messages = loadTalkMessages(this.state.talks, this.state.current_talk);
       console.log("updated");
