@@ -78,9 +78,9 @@ const loadTalkMessages = (talks, talk_name) => {
 
   return talk.messages.map(message => {
     if (message[0] == 'sent') {
-      return <MessageSent content={message[1]} />
+      return <MessageSent content={message[1]} date={new Date(message[2])} />
     } else {
-      return <MessageReceived content={message[1]} />
+      return <MessageReceived content={message[1]} date={new Date(message[2])}/>
     }
   });
 }
