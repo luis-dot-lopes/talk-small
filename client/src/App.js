@@ -108,6 +108,8 @@ class App extends React.Component {
     const user_id = sessionStorage.getItem("user_id");
     const headers = new Headers({ "Content-Type": "application/json" });
 
+    window.location.href = "#location";
+
     fetch("http://localhost:3001/listMessages",
       { method: "POST", headers, body: JSON.stringify({ user_id }) })
       .then((res) => res.json())
@@ -161,8 +163,6 @@ class App extends React.Component {
       talk_messages = loadTalkMessages(this.state.talks, this.state.current_talk);
       console.log("updated");
     }
-
-    window.location.href = "#location";
 
     document.addEventListener("keyup", (e) => {
       document.querySelector(".message-input").focus();

@@ -1,27 +1,38 @@
+import { useHistory } from "react-router-dom";
+import { createSemanticDiagnosticsBuilderProgram } from "typescript";
+
 import './styles/style.acess.css';
 
-const makeLoginRequest = async () => {
+function Login() {
 
-    const email = document.querySelector("#email").value;
-    const password = document.querySelector("#password").value;
+    const history = useHistory();
 
-    const headers = new Headers({ "Content-Type": "application/json" });
-    const req = await fetch("http://localhost:3001/login",
-        { method: "POST", headers, body: JSON.stringify({ email, password }) });
-
-    const json = await req.json();
-
-    if (json.user_id) {
-        window.sessionStorage.setItem("user_id", json.user_id);
-        window.sessionStorage.setItem("raw_id", json.raw_id);
-        window.location.reload();
-    } else {
-        document.querySelector("#error").style = "color: red;";
+    function goToRegister() {
+        history.push("/register");
     }
 
-};
+    async function makeLoginRequest() {
 
-function Login() {
+        const email = document.querySelector("#email").value;
+        const password = document.querySelector("#password").value;
+
+        const headers = new Headers({ "Content-Type": "application/json" });
+        const req = await fetch("http://localhost:3001/login",
+            { method: "POST", headers, body: JSON.stringify({ email, password }) });
+
+        const json = await req.json();
+
+        if (json.user_id) {
+            window.sessionStorage.setItem("user_id", json.user_id);
+            window.sessionStorage.setItem("raw_id", json.raw_id);
+
+            history.push("/talks");
+        } else {
+            document.querySelector("#error").style = "color: red;";
+        }
+
+    }
+
     return (
         <div className="login">
             <img src="images/talk-small-logo.png" alt="talk-small-logo" className="logo" draggable="false" />
@@ -51,37 +62,43 @@ function Login() {
             </form>
             <div className="alert">
                 Don't have a account?
-                <button className="alternate">Sign up</button>
+                <button onClick={goToRegister} className="alternate">Sign up</button>
             </div>
         </div>
     );
 }
 
-const makeRegisterRequest = async () => {
+function Register() {
 
-    const email = document.querySelector("#email").value;
-    const password = document.querySelector("#password").value;
-    const username = document.querySelector("#username").value;
+    const history = useHistory();
 
-    const headers = new Headers({ "Content-Type": "application/json" });
-    const req = await fetch("http://localhost:3001/signup", 
-        { method: "POST", headers, body: JSON.stringify({ email, password, username }) });
-    
-    const json = await req.json();
-
-    if(json.user_id) {
-        window.sessionStorage.setItem("user_id", json.user_id);
-
-        window.location = "/talks";
-    } else {
-        document.querySelector("#error").style = "color: red;";
+    function goToLogin() {
+        history.push("/");
     }
 
-}
+    async function makeRegisterRequest() {
 
-function Register() {
+        const email = document.querySelector("#email").value;
+        const password = document.querySelector("#password").value;
+        const username = document.querySelector("#username").value;
+
+        const headers = new Headers({ "Content-Type": "application/json" });
+        const req = await fetch("http://localhost:3001/signup", 
+            { method: "POST", headers, body: JSON.stringify({ email, password, username }) });
+        
+        const json = await req.json();
+
+        if(json.user_id) {
+            window.sessionStorage.setItem("user_id", json.user_id);
+            history.push("/talks");
+        } else {
+            document.querySelector("#error").style = "color: red;";
+        }
+
+    }
+
     return (
-        <>
+        <div>
             <div className="register">
                 <img src="images/talk-small-logo.png" alt="talk-small-logo" className="logo" draggable="false" />
                 <form action="" id="form">
@@ -125,9 +142,9 @@ function Register() {
             </div>
             <div className="alert">
                 Have account?
-                <button className="alternate">Sign in</button>
+                <button onClick={goToLogin} className="alternate">Sign in</button>
             </div>
-        </>
+        </div>
     );
 }
 
