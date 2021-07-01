@@ -80,7 +80,20 @@ function Register() {
 
         const email = document.querySelector("#email").value;
         const password = document.querySelector("#password").value;
+        const confirm_password = document.querySelector("#password-verify").value;
         const username = document.querySelector("#username").value;
+
+        if(password != confirm_password) {
+            const error_label = document.querySelector("#error");
+            error_label.textContent = "The passwords should be equal";
+            error_label.style = "color: red;";
+            return;
+        } else if(password.length < 5) {
+            const error_label = document.querySelector("#error");
+            error_label.textContent = "The password should be at least five characters long";
+            error_label.style = "color: red;";
+            return;
+        }
 
         const headers = new Headers({ "Content-Type": "application/json" });
         const req = await fetch("http://localhost:3001/signup", 
@@ -93,6 +106,7 @@ function Register() {
             history.push("/talks");
         } else {
             document.querySelector("#error").style = "color: red;";
+            document.querySelector("#error").textContent = json.message;
         }
 
     }
@@ -138,6 +152,9 @@ function Register() {
                             className="submit"
                             onClick={makeRegisterRequest}
                         />
+                        <p id="error" style={{ visibility: 'hidden' }}>
+                            Invalid email or password
+                        </p>
                 </form>
             </div>
             <div className="alert">
