@@ -9,7 +9,7 @@ interface IUserSession {
 
 class UsersController {
 
-    static active_sessions: IUserSession[] = [];
+    static active_sessions = {};
 
     async create(req: Request, res: Response) {
         
@@ -33,11 +33,11 @@ class UsersController {
 
         const session: IUserSession = { user_id: user.id, id: uuid() };
 
-        UsersController.active_sessions.push(session);
+        UsersController.active_sessions[session.id] = session.user_id;
         
         console.log(session.id);
 
-        return res.json({ user_id: session.id });
+        return res.json({ user_id: session.id, raw_id: session.user_id });
     }
 
     async loginIn(req: Request, res: Response) {
@@ -52,7 +52,7 @@ class UsersController {
 
             const session: IUserSession = { user_id: user.id, id: uuid() };
 
-            UsersController.active_sessions.push(session);
+            UsersController.active_sessions[session.id] = session.user_id;
 
             console.log(session.id);
 

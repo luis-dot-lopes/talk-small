@@ -18,7 +18,7 @@ class MessagesController {
         const messagesService = new MessagesService();
         const usersService = new UsersService();
 
-        const senderLogged = UsersController.active_sessions.find(session => session.id === session_id);
+        const senderLogged = UsersController.active_sessions[session_id];
         const receiverExists = await usersService.findByID(receiver_id);
 
         const senderExists = senderLogged ? senderLogged.user_id : undefined;
@@ -42,7 +42,7 @@ class MessagesController {
         const messagesService = new MessagesService();
         const usersService = new UsersService();
 
-        const senderLogged = UsersController.active_sessions.find(session => session.id === session_id);
+        const senderLogged = UsersController.active_sessions[session_id];
         const receiverExists = await usersService.findByID(receiver_id);
 
         const senderExists = senderLogged ? senderLogged.user_id : undefined;
@@ -63,11 +63,9 @@ class MessagesController {
 
     async listByUser(req: Request, res: Response) {
         
-        console.log(`Listing for ${req.body}`);
-
         const { user_id } = req.body;
 
-        const real_id = UsersController.active_sessions.find(session => session.id == user_id).user_id;
+        const real_id = UsersController.active_sessions[user_id];
 
         const messagesService = new MessagesService();
 

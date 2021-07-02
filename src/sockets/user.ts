@@ -6,7 +6,7 @@ import { io } from "../http";
 import { UsersService } from "../services/UsersService";
 
 const messagesController = new MessagesController();
-const sockets = [];
+const sockets = {};
 
 io.on("connect", socket => {
     console.log("connected");
