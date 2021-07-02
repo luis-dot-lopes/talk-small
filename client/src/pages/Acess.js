@@ -82,17 +82,23 @@ function Register() {
         const password = document.querySelector("#password").value;
         const confirm_password = document.querySelector("#password-verify").value;
         const username = document.querySelector("#username").value;
+        const error_label = document.querySelector("#error");
+        const email_regex = /^\S+@\S+$/;
 
         if(password != confirm_password) {
-            const error_label = document.querySelector("#error");
             error_label.textContent = "The passwords should be equal";
             error_label.style = "color: red;";
             return;
         } else if(password.length < 5) {
-            const error_label = document.querySelector("#error");
             error_label.textContent = "The password should be at least five characters long";
             error_label.style = "color: red;";
             return;
+        } else if(!email_regex.test(email)) {
+            error_label.textContent = "Email is invalid";
+            error_label.style = "color: red;";
+            return;
+        } else {
+            error_label.style = "visibility: hidden;";
         }
 
         const headers = new Headers({ "Content-Type": "application/json" });
