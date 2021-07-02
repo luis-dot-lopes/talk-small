@@ -12,6 +12,10 @@ interface ICreateMessage {
 class MessagesController {
     
     async createFromReq(req: Request, res: Response) {
+        /**
+         * Takes a request and creates a message storing it in the database
+         * and responds with json representation of the message
+         */
 
         const { session_id, receiver_id, text } = req.body;
 
@@ -38,7 +42,11 @@ class MessagesController {
     }
 
     async create({session_id, receiver_id, text} : ICreateMessage) {
+        /**
+         * Takes object representing a message and saves it to the database
+         */
 
+        //Init services
         const messagesService = new MessagesService();
         const usersService = new UsersService();
 
@@ -47,7 +55,9 @@ class MessagesController {
 
         const senderExists = senderLogged ? senderLogged.user_id : undefined;
 
+        //Checks if both sender is alredy logged and receiver exists in the database
         if(senderExists && receiverExists) {
+            //Creates a message in the database and returns the object created
             const message = await messagesService.create({
                 sender_id: senderExists,
                 receiver_id,
