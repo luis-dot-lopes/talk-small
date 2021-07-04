@@ -31,6 +31,10 @@ function Register() {
             error_label.textContent = "Email is invalid";
             error_label.style = "color: red;";
             return;
+        } else if(username.length === 0) {
+            error_label.textContent = "The username can't be empty";
+            error_label.style = "color: red;";
+            return;
         } else {
             error_label.style = "visibility: hidden;";
         }
