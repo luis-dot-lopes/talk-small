@@ -43,7 +43,7 @@ export class CreateTalks1625496249836 implements MigrationInterface {
                         onDelete: "SET NULL",
                         onUpdate: "SET NULL",
                     },
-                ]
+                ],
             })
         );
     }
