@@ -19,7 +19,7 @@ class TalksService {
 	//If it already exists, returns it
 	async create({ user_id1, user_id2 } : ICreateTalk) {
 
-		let talkExists = this.findByUsers(user_id1, user_id2);
+		const talkExists = await this.findByUsers(user_id1, user_id2);
 
 		if(talkExists) {
 			return talkExists;
@@ -35,17 +35,17 @@ class TalksService {
 		return talk;
 	}
 
-	async findByUsers(user_id1: string, user_id2: string) {
+	async findByUsers(_user_id1: string, _user_id2: string) {
 		
 		const talk = await this.talksRepository.findOne({
 			where: [
 				{
-					user_id1: user_id1,
-					user_id2: user_id2,
+					user_id1: _user_id1,
+					user_id2: _user_id2,
 				},
 				{
-					user_id1: user_id2,
-					user_id2: user_id1,
+					user_id1: _user_id2,
+					user_id2: _user_id1,
 				},
 			]
 		});

@@ -6,13 +6,14 @@ import { TalksService } from "../../services/TalksService";
 export class MessageRefactoring1625879108742 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-        queryRunner.addColumn("messages",
+        await queryRunner.addColumn("messages",
             new TableColumn({
                 name: "talk_id",
                 type: "uuid",
+                isNullable: true,
             })
         );
-        queryRunner.createForeignKey("messages", 
+        await queryRunner.createForeignKey("messages", 
             new TableForeignKey({
                 name: "FKTalk",
                 referencedTableName: "talks",
@@ -35,7 +36,7 @@ export class MessageRefactoring1625879108742 implements MigrationInterface {
                 user_id2: receiver_id,
             });
 
-            await messagesRepository.update({ id }, {talk_id: talk.id });
+            await messagesRepository.update({ id }, { talk_id: talk.id });
         }
 
     }
