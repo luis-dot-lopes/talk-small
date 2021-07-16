@@ -54,6 +54,17 @@ class TalksService {
 
 	}
 
+	async listByUser(user_id: string) {
+
+		const talks = await this.talksRepository.find({
+			where: [
+				{ user_id1: user_id },
+				{ user_id2: user_id },
+			],
+		});
+
+		return talks;
+	}
 }
 
 export { TalksService };
