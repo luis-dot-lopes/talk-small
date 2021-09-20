@@ -15,6 +15,7 @@ class MessagesController {
         /**
          * Takes a request and creates a message storing it in the database
          * and responds with json representation of the message
+         * Test only method
          */
 
         const { session_id, receiver_id, text } = req.body;
