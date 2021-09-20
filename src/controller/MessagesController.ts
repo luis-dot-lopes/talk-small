@@ -54,13 +54,11 @@ class MessagesController {
         const senderLogged = UsersController.active_sessions[session_id];
         const receiverExists = await usersService.findByID(receiver_id);
 
-        const senderExists = senderLogged ? senderLogged.user_id : undefined;
-
         //Checks if both sender is alredy logged and receiver exists in the database
-        if(senderExists && receiverExists) {
+        if(senderLogged && receiverExists) {
             //Creates a message in the database and returns the object created
             const message = await messagesService.create({
-                sender_id: senderExists,
+                sender_id: senderLogged,
                 receiver_id,
                 text,
             });
