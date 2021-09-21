@@ -33,6 +33,18 @@ class TalksController {
 
 	}
 
+	async listByUser(req: Request, res: Response) {
+
+		const { session_id } = req.body;
+		const user_id = UsersController.active_sessions[session_id];
+
+		const talksService = new TalksService();
+		
+		const talks = talksService.listByUser(user_id);
+
+		return res.json(talks);
+	}
+
 }
 
 export { TalksController };
