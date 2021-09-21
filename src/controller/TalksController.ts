@@ -40,7 +40,7 @@ class TalksController {
 
 		const talksService = new TalksService();
 		
-		const talks = talksService.listByUser(user_id);
+		const talks = await talksService.listByUser(user_id);
 
 		return res.json(talks);
 	}
