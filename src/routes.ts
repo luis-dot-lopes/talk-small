@@ -19,6 +19,7 @@ router.post("/signup", usersController.create);
 router.post("/login", usersController.loginIn);
 router.post("/send", messagesController.createFromReq);
 router.post("/listMessages", messagesController.listByUser);
+router.post("/listMessagesByTalk", messagesController.listByTalk);
 
 router.post("/createTalk", talksController.createFromReq);
 router.post("/listTalks", talksController.listByUser);

@@ -83,6 +83,18 @@ class MessagesController {
         return res.json(messages);
 
     }
+
+    async listByTalk(req: Request, res: Response) {
+        
+        const { talk_id } = req.body;
+
+        const messagesService = new MessagesService();
+
+        const messages = await messagesService.listByTalk(talk_id);
+
+        return res.json(messages);
+
+    }
 }
 
 export { MessagesController };
