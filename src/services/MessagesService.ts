@@ -1,7 +1,7 @@
-import { getCustomRepository, Repository } from "typeorm";
+import { getCustomRepository, LessThanOrEqual, Repository } from "typeorm";
 import { Message } from "../entities/Message";
-import { User } from "../entities/User";
 import { MessagesRepository } from "../repositories/MessagesRepository";
+import { TalksService } from "./TalksService";
 
 interface ICreateMessage {
     sender_id: string;
@@ -19,10 +19,14 @@ class MessagesService {
 
     async create({ sender_id, receiver_id, text } : ICreateMessage) {
 
+        const talksService = new TalksService();
+        const talk_id = (await talksService.create({ user_id1: sender_id, user_id2: receiver_id })).id;
+
         const message = await this.messagesRepository.create({
             sender_id,
             receiver_id,
             text,
+            talk_id,
         });
 
         await this.messagesRepository.save(message);
@@ -73,6 +77,22 @@ class MessagesService {
 
         return messages;
         
+    }
+
+    async listByTalk(talk_id: string) {
+
+        const messages = await this.messagesRepository.find({ talk_id });
+
+        return messages;
+    }
+
+    //Function to list n messages created before a given date, using a talk_id
+    async takeNBeforeDateByTalk(talk_id: string, n: number, date: Date) {
+        const messages = await this.messagesRepository.find({
+            order: { created_at: "DESC" },
+            where: { talk_id, created_at: LessThanOrEqual(date) },
+            take: n,
+        });
     }
 
 }

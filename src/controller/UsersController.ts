@@ -9,8 +9,11 @@ interface IUserSession {
 
 class UsersController {
 
-    static active_sessions: IUserSession[] = [];
+/*  This is an object with the ids os the logged users' sessions as keys and
+    the ids of the users as values. Used to check wheter a user exists or not */
+    static active_sessions = {};
 
+    //Creates an user from a /signup request
     async create(req: Request, res: Response) {
         
         const { email, password, username } = req.body;
@@ -33,13 +36,14 @@ class UsersController {
 
         const session: IUserSession = { user_id: user.id, id: uuid() };
 
-        UsersController.active_sessions.push(session);
+        UsersController.active_sessions[session.id] = session.user_id;
         
         console.log(session.id);
 
-        return res.json({ user_id: session.id });
+        return res.json({ user_id: session.id, raw_id: session.user_id });
     }
 
+    //Creates new session for a user that logged in
     async loginIn(req: Request, res: Response) {
         
         const { email, password } = req.body;
@@ -52,7 +56,7 @@ class UsersController {
 
             const session: IUserSession = { user_id: user.id, id: uuid() };
 
-            UsersController.active_sessions.push(session);
+            UsersController.active_sessions[session.id] = session.user_id;
 
             console.log(session.id);
 

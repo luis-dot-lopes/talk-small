@@ -6,15 +6,20 @@ import { io } from "../http";
 import { UsersService } from "../services/UsersService";
 
 const messagesController = new MessagesController();
-const sockets = [];
+const sockets = {};
 
 io.on("connect", socket => {
     console.log("connected");
+
+    //Triggered when user logs in to relate their socket to their session id
     socket.on("loggedIn", ({ user_id }, fn) => { 
         console.log("user logged");
         sockets[user_id] = socket;
         fn("Hello");
     });
+
+    //Receives a message from the client, saving it to the database and
+    //sending it both to the receiver and sender.
     socket.on("message", async (message, fn) => {
         const new_message = await messagesController.create(message);
         const isMessage = (obj: Message | { error: string }): obj is Message => true;
@@ -24,6 +29,8 @@ io.on("connect", socket => {
             const receiver_name = (await usersService.findByID(receiver_id)).username;
             const sender_name = (await usersService.findByID(sender_id)).username;
             const receiver_socket = sockets[receiver_id];
+
+            // Sending message back to the sender
             fn({
                 sent_messages : [
                     {
@@ -35,6 +42,8 @@ io.on("connect", socket => {
                 ],
                 received_messages : [],
             });
+
+            // Sending message to update the receiver
             receiver_socket.emit("message-received", {
                 received_messages : [
                     {
