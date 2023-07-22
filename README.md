@@ -10,7 +10,7 @@ Para o back-end, os pacotes usados são Express, TypeORM e uuid. O banco de dado
 
 O código está escrito em inglês por preferência pessoal e acessibilidade.
 
-Neste projeto, também partipa Jairo Silva: https://www.github.com/jairosilva2005
+Neste projeto, também partipa Jairo Silva: https://www.github.com/jairo2k5
 
 English version:
 
@@ -24,4 +24,4 @@ For the back-end, the packages used are Express TypeORM and uuid. The database i
 
 The code is written in English due to my personal preference and accessibility.
 
-In this project, Jairo Silva also participates: https://www.github.com/jairosilva2005
+In this project, Jairo Silva also participates: https://www.github.com/jairo2k5
